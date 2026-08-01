@@ -1,0 +1,431 @@
+<style>
+    html{
+        scroll-behavior: smooth;
+    }
+    *{
+        box-sizing: border-box;
+    }
+    body{
+        margin: 0;
+        background-color:lightblue;
+        font-family: Arial, sans-serif;
+    }
+    header{
+        background-color: darkblue;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    header h1{
+        margin: 0 0 15px;
+    }
+
+    nav{
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+    }
+    nav a{
+        color: white;
+        text-decoration: none;
+    }
+
+    /* Prevent section headings from hiding behind the sticky header */
+    #hero,
+    #about,
+    #skills,
+    #projects,
+    #education,
+    #contact{
+        scroll-margin-top: 110px;
+    }
+
+
+    .hero{
+        padding: 80px 20px;
+        text-align: center;
+        background-color: #dff4ff;
+
+        animation-name: fadeIn;
+        animation-duration: 1s;
+        animation-timing-function: ease;
+        animation-fill-mode: both;
+    }
+    .hero h1{
+        margin: 0;
+        color: darkblue;
+        font-size: 48px;
+    }
+    .hero p{
+        max-width: 600px;
+        margin: 20px auto 0;
+        color: #333;
+        font-size: 18px;
+        line-height: 1.6;
+    }
+    .hero-button{
+        display: inline-block;
+        margin-top: 25px;
+        padding: 14px 28px;
+        background-color: darkblue;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+
+        transition: 0.3s ease;
+    }
+    .hero-button:hover{
+        background-color: royalblue;
+
+        transform: scale(1.05);
+    }
+    .about{
+        padding: 70px 20px;
+        text-align: center;
+        background-color: white;
+
+        animation-name: fadeIn;
+        animation-duration: 1s;
+        animation-timing-function: ease;
+        animation-fill-mode: both;
+        animation-delay: 0.3s;
+    }
+    .about h2{
+        margin-top: 0;
+        color: darkblue;
+        font-size: 36px;
+
+    }
+    .about p{
+        max-width: 700px;
+        margin: 0 auto 30px;
+        color: #444;
+        font-size: 17px;
+        line-height: 1.7;
+    }
+    .about img{
+        width: 100%;
+        max-width: 600px;
+        height: 350px;
+        border-radius: 20px;
+        object-fit: cover;
+    }
+
+    /* Skills Section */
+
+    .skills{
+        padding: 70px 20px;
+        text-align: center;
+        background-color: #dff4ff;
+    }
+    .skills h2{
+        margin-top: 0;
+        color: darkblue;
+        font-size: 70px;
+    }
+    .skill-container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        max-width: 700px;
+        margin: 30px auto 0;
+    }
+    .skill-container span{
+        background-color: white;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-weight: bold;
+        color: darkblue;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+        transition: 0.3s ease;
+    }
+    .skill-container span:hover{
+        background-color: darkblue;
+        color: white;
+        transform: scale(1.05);
+    }
+
+
+    /* Section Heading. */
+
+    .card-container{
+        background-color: white;
+        padding: 70px 20px;
+    }
+
+    .section-heading{
+        padding: 70px 20px;
+        text-align: center;
+        background-color: white;
+
+        animation-name: fadeIn;
+        animation-duration: 1s;
+        animation-timing-function: ease;
+        animation-fill-mode: both;
+        animation-delay: 0.3s;
+    }
+    .section-heading h2{
+        margin-top: 0;
+        color: darkblue;
+        font-size: 36px;
+
+    }
+    .section-heading p{
+        max-width: 700px;
+        margin: 0 auto 30px;
+        color: #444;
+        font-size: 17px;
+        line-height: 1.7;
+    }
+
+
+
+    /* Project Section. */
+    .project-container{
+        width: 100%;
+        max-width: 1200px;
+        margin: auto;
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+    .project-card{
+        position: relative;
+        height: 380px;
+        border-radius: 10px 60px 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+        overflow: hidden;
+        cursor: pointer;
+    }
+    .project-card img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: 0.5s ease;
+    }
+    .project-overlay{
+        position: absolute;
+        inset: 0;
+        padding: 30px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        color: white;
+        background: rgba(7, 20, 60, 0.45);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+
+        transform: translateY(100%);
+        transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-overlay,
+    .project-card:focus .project-overlay,
+    .project-card:focus-within .project-overlay{
+        transform: translateY(0);
+    }
+
+    .project-card:hover img,
+    .project-card:focus img,
+    .project-card:focus-within img{
+        transform: scale(1.08);
+    }
+
+    .project-overlay h3{
+        margin: 0 0 12px;
+        font-size: 26px;
+    }
+    .project-overlay p{
+        margin: 0;
+        line-height: 1.6;
+        color: #f1f1f1;
+    }
+    .project-buttons{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 22px;
+    }
+    .project-buttons a{
+        display: inline-block;
+        padding: 11px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s ease;
+    }
+    .live-button{
+        background-color: white;
+        color: darkblue;
+    }
+    .source-button{
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        background-color: rgba(255, 255, 255, 0.12);
+    }
+    .project-buttons a:hover{
+        transform: translateY(-3px);
+    }
+    .live-button:hover{
+        background-color: #dff4ff;
+    }
+    .source-button:hover{
+        background-color: white;
+        color: darkblue;
+    }
+    
+
+    /*Education Section*/
+    .education{
+        padding: 80px 20px;
+        background-color: white;
+    }
+    .timeline{
+        width: 100%;
+        max-width: 850px;
+        margin: auto;
+
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+    .timeline-card{
+        padding: 28px;
+        background-color: #f7fbff;
+        border-left: 6px solid darkblue;
+        border-radius: 10px 30px 60px 120px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+
+        transition: 0.3s ease;
+    }
+    .timeline-card:hover{
+        transform: translateY(-8px);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+    }
+    .timeline-card .duration{
+        display: inline-block;
+        margin-bottom: 12px;
+        color: royalblue;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .timeline-card h3{
+        margin: 0 0 8px;
+        color: darkblue;
+        font-size: 24px;
+    }
+
+
+
+    /*Contact Section*/
+    .contact{
+        padding: 80px 20px;
+        background-color: #dff4ff;
+    }
+
+    .contact-form{
+        width: 100%;
+        max-width: 700px;
+        margin: 20px auto 0;
+        padding: 35px;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    }
+    .form-group label{
+        display: block;
+        margin-bottom: 8px;
+        color: darkblue;
+        font-weight: bold;
+    }
+    .form-group input,
+    .form-group textarea{
+        width: 100%;
+        padding: 14px;
+        border: 1px solid #c8d6ef;
+        border-radius: 8px;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        outline: none;
+        transition: 0.3s ease;
+    }
+    .contact-button{
+        width: 100%;
+        padding: 14px 24px;
+        background-color: darkblue;
+        color: white;
+        border: none;
+        border-radius: 10px 30px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+    .contact-button:hover{
+        background-color: royalblue;
+        transform: translateY(-2px);
+    }
+    .contact-info{
+        max-width: 700px;
+        margin: 35px auto 0;
+        text-align: center;
+        color: #444;
+    }
+    .contact-info a{
+        color: darkblue;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    .contact-info a:hover{
+        text-decoration: underline;
+    }
+
+
+    /* Animations */
+    @keyframes fadeIn{
+        from{
+            opacity: 0;
+            transform: translateY(0);
+        }
+        to{
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .hero{
+            padding: 60px 20px;
+        }
+        .hero h1{
+            font-size: 36px;
+        }
+        .about{
+            padding: 50px 20px;
+        }
+        .about h2{
+            font-size: 30px;
+        }
+        .about img{
+            height: 250px;
+        }
+        .project-container{
+            grid-template-columns: 1fr;
+        }
+        nav{
+            gap: 15px;
+        }
+        
+    }
+</style>
